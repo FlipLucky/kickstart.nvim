@@ -333,7 +333,7 @@ require('lazy').setup({
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
+
       -- many different aspects of Neovim, your workspace, LSP, and more!
       --
       -- The easiest way to use Telescope, is to start by doing something like:
@@ -883,6 +883,27 @@ require('lazy').setup({
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+  },
+  {
+    'christoomey/vim-tmux-navigator',
+    config = function()
+      vim.keymap.set('n', 'C-h', 'TmuxNavigateLeft<CR>', {})
+      vim.keymap.set('n', 'C-j', 'TmuxNavigateDown<CR>', {})
+      vim.keymap.set('n', 'C-k', 'TmuxNavigateUp<CR>', {})
+      vim.keymap.set('n', 'C-l', 'TmuxNavigateRight<CR>', {})
+    end,
+  },
+  {
+    'vim-test/vim-test',
+    dependencies = {
+      'preservim/vimux',
+    },
+    config = function()
+      vim.keymap.set('n', 'leader>t', ':TestNearest<CR>', {})
+      vim.keymap.set('n', 'leader>T', ':TestFile<CR>', {})
+      vim.keymap.set('n', 'leader>a', ':TestSuite<CR>', {})
+      vim.cmd 'let test#strategy = "vimux"'
+    end,
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
